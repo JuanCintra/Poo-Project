@@ -5,8 +5,6 @@
  */
 package poo.project;
 
-import java.math.BigInteger;
-import java.util.Scanner;
 
 /**
  *

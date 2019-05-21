@@ -8,7 +8,6 @@ package poo.project;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.*;
 public class Agenda {
 
     /**
@@ -21,10 +20,10 @@ public class Agenda {
         ArrayList<Estoque> produtos = new ArrayList();
         Scanner scn = new Scanner(System.in);
     
-        byte menuV = 0;
-        byte menuP = 0;
-        byte menuC = 0;
-        byte menuE= 0;
+        byte menuV ;
+        byte menuP ;
+        byte menuC ;
+        byte menuE ;
         int quantidadeCam=0,quantidadeCal=0;
         
         do{
@@ -78,7 +77,7 @@ public class Agenda {
                         switch(menuE){
                             //Cadastrar Produto
                             case 1:
-                                String cor=null;
+                                String cor;
                                 
                                 System.out.println("Insira o Tipo do produto\n 1) Camisa\n 2) Calça");
                                 byte tipo=scn.nextByte();

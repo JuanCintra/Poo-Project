@@ -1,7 +1,6 @@
 package poo.project;
 
 import java.math.BigInteger;
-import java.util.Scanner;
 
 public class Cliente {
     private String nome,sexo;
