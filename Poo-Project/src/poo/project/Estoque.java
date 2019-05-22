@@ -2,7 +2,7 @@
 package poo.project;
 
 
-//teste
+
 public class Estoque {
     
     byte tipo;
