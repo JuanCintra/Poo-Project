@@ -30,15 +30,20 @@ public class Agenda {
             System.out.println("1) Vendas");
             System.out.println("2) Estoque");
             System.out.println("3) Cadastrar Cliente");
+            System.out.println("4) Sair");
             System.out.println("____________________________________");
             
             menuP=scn.nextByte();
+            if(menuP==0||menuP>5){
+              System.out.println("Número inválido");
+            }
             
             switch(menuP){
                 
                 //Vendas
                 case 1:
                     //Começo do case 1 (
+                       
                     do{
                         System.out.println("1) Nova Venda");
                         System.out.println("2) Procurar Venda");
@@ -46,6 +51,9 @@ public class Agenda {
                         System.out.println("4) Voltar");
                         System.out.println("____________________________________");
                         menuV=scn.nextByte();
+                        if(menuV==0 || menuV>4){
+                           System.out.println("Número inválido");
+                       }
                         switch(menuV){
                             case 1:
                                 break;
@@ -63,10 +71,11 @@ public class Agenda {
                     }
                     while(menuV!=4);
                 break;
-                
+        
                 //Estoque
                 case 2:
                     //Começo do case 2 (
+
                     do{
                         System.out.println("1) Cadastrar Produto");
                         System.out.println("2) Buscar Produto");
@@ -74,6 +83,9 @@ public class Agenda {
                         System.out.println("4) Voltar");  
                         System.out.println("____________________________________");
                         menuE=scn.nextByte();
+                        if(menuE==0||menuE>4){
+                           System.out.println("Número inválido");
+                       }
                         switch(menuE){
                             //Cadastrar Produto
                             case 1:
@@ -173,6 +185,8 @@ public class Agenda {
                             case 4:                                
                                 menuE=4;
                                 break;
+                            default:
+                                menuE=0;
                         }                                                
                     }
                     while(menuE!=4);
@@ -188,15 +202,15 @@ public class Agenda {
                         System.out.println("2) Buscar cliente");
                         System.out.println("3) Excluir cliente");
                         System.out.println("4) Imprimir cliente");
-                        System.out.println("5) Sair");
+                        System.out.println("5) Voltar");
 
                         System.out.println("____________________________________");
 
                         menuC = scn.nextByte();
 
                         //Msg de erro
-                        if(menuC!=1 && menuC!=0){
-                           System.out.println("Número ou letra inválido(a)");
+                        if(menuC==0 || menuC>5){
+                           System.out.println("Número inválido");
                        }
 
                         switch(menuC){
@@ -417,25 +431,13 @@ public class Agenda {
                             break;
                         }
 
-                    } while (menuC<5);
+                    } while (menuC!=5);
+                    break;
                     //Fim do case 3
                     
                 case 4:
                     menuP=4;
-              }
-                    
-         
-               
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+              }   
         }
         while (menuP!=4);
         
