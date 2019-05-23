@@ -266,7 +266,7 @@ public class Agenda {
                                                 idEstoque.setQuantidade(idEstoque.getQuantidade()-quantidade);
                                                 String cor=idEstoque.getCor();
                                                 byte tipo=idEstoque.getTipo();
-
+                                                System.out.println("O id da venda é " + idVenda);
                                                 vendas.add(new Venda(idVenda, tipo, cor, codigoProduto, quantidade));
                                                 System.out.println("\nVENDA CADASTRADA COM SUCESSO!");
                                                 }
@@ -328,8 +328,8 @@ public class Agenda {
                                                 vendaExiste++;
                                                 agenda.get(i);
                                                 produtos.get(i);
-                                            System.out.printf("%-7s%10s%7s%13s%11s%13s%n","Cliente", "Nome","Idade","CPF", "Sexo", "Telefone");
-                                            System.out.printf("       %10S%7d%13s%11s%13s%n",idCliente.getNome(),idCliente.getIdade(),idCliente.getCpf(), idCliente.getSexo(), idCliente.getTelefone());
+                                            System.out.printf("%-7s%10s%7s%13s%11s%13s%6s%n","Cliente", "Nome","Idade","CPF", "Sexo", "Telefone","ID");
+                                            System.out.printf("       %10S%7d%13s%11s%13s%6d%n",idCliente.getNome(),idCliente.getIdade(),idCliente.getCpf(), idCliente.getSexo(), idCliente.getTelefone(),idCliente.getIdVenda());
                                             for (i = 0; i <produtos.size(); i++) {
                                               Venda idVenda = vendas.get(i);
                                                 if (idVenda.getIdVenda()==buscar) {
@@ -418,7 +418,8 @@ public class Agenda {
                                         loopProduto++;
                                         System.out.println("Insira a quantidade:");
                                         quantidade=scn.nextInt();
-                                        idEstoque.setQuantidade(quantidade+=quantidade);
+                                        int quantidadeEstoque=idEstoque.getQuantidade();
+                                        idEstoque.setQuantidade(quantidadeEstoque+=quantidade);
                                         }
                                     
                                         
