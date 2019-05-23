@@ -4,9 +4,9 @@ package poo.project;
 import java.math.BigInteger;
 
 
-public abstract class Venda extends Estoque {
+public class Venda extends Estoque {
     int idVenda;
-    private int quantidade;
+    
     
     
     public Venda(int idVenda,byte tipo, String cor,int codigoProduto, int quantidade){ 
