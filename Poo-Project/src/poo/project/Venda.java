@@ -4,17 +4,24 @@ package poo.project;
 import java.math.BigInteger;
 
 
-public abstract class Venda {
-    int idvenda;
+public abstract class Venda extends Estoque {
+    int idVenda;
+    private int quantidade;
     
-    public Venda(int idvenda){
-        this.idvenda=idvenda;
+    
+    public Venda(int idVenda,byte tipo, String cor,int codigoProduto, int quantidade){ 
+        super(tipo, cor, codigoProduto, quantidade);
+        this.idVenda= idVenda;
+        this.tipo = tipo;
+        this.cor = cor;
+        this.codigoProduto = codigoProduto;
+        this.quantidade = quantidade;
     }
-    public int getIdvenda(){
-        return idvenda;
+    public int getIdVenda(){
+        return idVenda;
 }
-    public void setIdvenda(int idvenda){
-        this.idvenda=idvenda;
+    public void setIdVenda(int idVenda){
+        this.idVenda=idVenda;
     }
     
 }

@@ -7,9 +7,9 @@ public class Cliente {
     private BigInteger telefone;
     private byte idade;
     private BigInteger cpf;
-    private int idvenda;
+    private int idVenda;
 
-    public Cliente(String nome ,byte idade,BigInteger cpf,String sexo, BigInteger telefone, int idvenda) {
+    public Cliente(String nome ,byte idade,BigInteger cpf,String sexo, BigInteger telefone, int idVenda) {
         
         
         
@@ -19,7 +19,7 @@ public class Cliente {
         this.idade = idade;
         this.telefone = telefone;
         this.sexo = sexo;
-   
+        this.idVenda = idVenda;
     }
     
     
@@ -53,11 +53,11 @@ public class Cliente {
     public String getSexo() {
         return sexo;
     }
-    public int getIdvenda() {
-        return idvenda;
+    public int getIdVenda() {
+        return idVenda;
     }
-    public void setIdvenda(int idvenda) {
-        this.idvenda = idvenda;
+    public void setIdVenda(int idVenda) {
+        this.idVenda = idVenda;
     }
     
         
