@@ -18,6 +18,7 @@ public class Agenda {
         
         ArrayList<Cliente> agenda = new ArrayList();
         ArrayList<Estoque> produtos = new ArrayList();
+      
         Scanner scn = new Scanner(System.in);
     
         byte menuV ;
@@ -29,7 +30,7 @@ public class Agenda {
         do{
             System.out.println("1) Vendas");
             System.out.println("2) Estoque");
-            System.out.println("3) Cadastrar Cliente");
+            System.out.println("3) Clientes");
             System.out.println("4) Sair");
             System.out.println("____________________________________");
             
@@ -56,6 +57,200 @@ public class Agenda {
                        }
                         switch(menuV){
                             case 1:
+                                //Começo do Case 1 Vendas
+                                System.out.println("1)Cliente já tem cadastro?\n1 - Sim\n2- Não");
+                                int w;
+                                w=scn.nextInt();
+                                
+                                //Busca Cliente em Vendas
+                                if(w==1){
+                                                          System.out.println("Sua lista tem "+agenda.size()+" clientes");
+
+                                //verifica se o ArrayList esta vazio
+                                if (agenda.isEmpty()) {
+                                    System.out.println("Sua lista nao tem clientes");
+                                }else{
+
+                                    System.out.print("Qual cliente voce deseja buscar? "); 
+                                    String buscar = scn.next();
+
+                                    for (int i = 0; i <agenda.size(); i++) {
+                                        Cliente idCliente =  agenda.get(i);
+                                        if (idCliente.getNome().equalsIgnoreCase(buscar)) {
+                                            agenda.get(i);
+                                     
+                                        }
+                                    }
+                                }
+
+                                System.out.println("_____________________________________");
+
+                                    
+                                }
+                           
+                              if(w==2){
+                                    //Cadastrar clientes
+                                System.out.print("Nome do cliente: "); 
+                                String nome = scn.next();
+                                System.out.print("Idade do cliente: "); 
+                                byte idade = scn.nextByte();
+                                System.out.print("CPF do cliente: "); 
+
+                                //Validar Cpf (44-172)
+                                int loop=0; 
+                                while(loop==0){
+                                    int  loop1=1;
+                                        while(loop1==1){   
+                                            Scanner entrada= new Scanner(System.in);
+                                            cpf= entrada.nextBigInteger();
+                                            String biStr = cpf.toString();
+                                            int[] cpf1 = new int[biStr.length()];
+                                            for(int i=0; i<biStr.length(); i++) {
+                                                cpf1[i] = Integer.parseInt(String.valueOf(biStr.charAt(i)));
+                                            }
+                                            int length = biStr.length();
+                                            if(length<11 || length>11){          
+                                                System.out.println("O cpf deve conter 11 dígitos. Insira novamente:");
+                                            }
+                                            else{
+                                                loop1++;
+                                                break;
+                                            }
+                                        }
+                                    int k=0,cpfigual=0;
+                                    int a=0,b=0,c=0,d=0,e=0,f=0,g=0,h=0,l=0,j=0;
+                                    String biStr = cpf.toString();
+                                    int[] cpf1 = new int[biStr.length()];
+                                    for(int i=0; i<biStr.length(); i++) {
+                                        cpf1[i] = Integer.parseInt(String.valueOf(biStr.charAt(i)));
+                                    }
+                                    int length = biStr.length();
+                                    if(length<11 || length>11){
+                                        System.out.println("O cpf deve conter 11 dígitos.");
+                                    }
+                                    while(k<length){
+
+                                        if(cpf1[k]==0){
+                                            a++;
+                                        }
+                                        if(cpf1[k]==1){
+                                            b++;
+                                        }
+                                        if(cpf1[k]==2){
+                                            c++;
+                                        }
+                                        if(cpf1[k]==3){
+                                            d++;
+                                        }
+                                        if(cpf1[k]==4){
+                                            e++;
+                                        }
+                                        if(cpf1[k]==5){
+                                            f++;
+                                        }
+                                        if(cpf1[k]==6){
+                                            g++;
+                                        }
+                                        if(cpf1[k]==7){
+                                            h++;
+                                        }
+                                        if(cpf1[k]==8){
+                                            l++;
+                                        }
+                                        if(cpf1[k]==9){
+                                            j++;
+                                        }
+
+                                        if(a==11||b==11||c==11||d==11||e==11||f==11||g==11||h==11||l==11||j==11){
+                                            cpfigual=1;
+                                            System.out.println("O cpf não pode conter todo os dígitos iguais!");
+                                        }
+
+                                        k++;
+                                    }
+
+                                    int y=11,z=0;
+                                    b=12;
+                                    c=0;
+
+                                    for(int x=0;x<=8;x++){
+                                        y--;
+                                        int digitoA=0, mult=0;
+                                        mult=cpf1[x]*y;
+                                        z=z+mult;
+
+                                        if(x==8){
+                                            digitoA=11-(z%11);
+
+                                            if(digitoA>=10){
+                                                digitoA=0;
+                                            }
+
+                                            if(digitoA==cpf1[9] && cpfigual!=1){
+                                                for(a=0;a<=9;a++){
+                                                    b--;
+                                                    int mult2=0,digitoB=0;
+                                                    mult2=cpf1[a]*b;
+                                                    c=c+mult2;                                   
+                                                    if(a==9){
+                                                        digitoB=11-(c%11);
+                                                        if(digitoB>=10){
+                                                            digitoB=0;
+                                                        }
+                                                        if(digitoB==cpf1[10] && cpfigual!=1){
+                                                            loop=1;
+                                                            break;
+                                                        }
+                                                        else if(digitoB!=cpf1[10] && a==9){
+                                                            System.out.println("Cpf Inválido!! Insira Novamente:");
+                                                            break;
+                                                        }
+                                                        if(a==9){
+                                                            break;
+                                                        }
+                                                    }
+
+                                                }   
+                                            }
+                                            else{
+                                                if(cpfigual==1){
+                                                    System.out.println("Insira Novamente:");
+                                                }
+                                                else{
+                                                System.out.println("Cpf Inválido!! Insira Novamente:");
+                                                }
+                                            }
+                                        }   
+                                    }
+                                }
+                      //Fim do validar cpf
+
+
+                                System.out.print("Sexo do cliente: "); 
+                                String sexo = scn.next(); 
+                                System.out.print("Número de Telefone do cliente: "); 
+                                BigInteger telefone = scn.nextBigInteger();
+                                int idvenda;
+                                idvenda=0;
+                                agenda.add(new Cliente(nome,idade,cpf,sexo,telefone,idvenda));
+                                System.out.println("\nCLIENTE CADASTRADO COM SUCESSO!");
+                                System.out.println("____________________________________");
+
+                                  
+                              }
+                                  //fim do cadastrar cliente
+                               
+                           
+                                System.out.println("Digite o Código do produto");
+                                
+                                /*for (int i = 0; i <agenda.size(); i++) {
+                                        Cliente idCliente =  agenda.get(i);
+                                        if (idCliente.getNome().equalsIgnoreCase(buscar)) {
+                                            agenda.get(i);
+                                     
+                                        }
+                                    }
+                                */
                                 break;
                             case 2:
                                 break;                                
@@ -198,172 +393,24 @@ public class Agenda {
                     //Começo do case 3 (30-260)
                     do {
                         //menu
-                        System.out.println("1) Cadastrar cliente");
-                        System.out.println("2) Buscar cliente");
-                        System.out.println("3) Excluir cliente");
-                        System.out.println("4) Imprimir cliente");
-                        System.out.println("5) Voltar");
+                        System.out.println("1) Buscar cliente");
+                        System.out.println("2) Excluir cliente");
+                        System.out.println("3) Imprimir cliente");
+                        System.out.println("4) Voltar");
 
                         System.out.println("____________________________________");
 
                         menuC = scn.nextByte();
 
                         //Msg de erro
-                        if(menuC==0 || menuC>5){
+                        if(menuC==0 || menuC>1){
                            System.out.println("Número inválido");
                        }
 
                         switch(menuC){
-                            case 1:
-                                //Cadastrar clientes
-                                System.out.print("Nome do cliente: "); 
-                                String nome = scn.next();
-                                System.out.print("Idade do cliente: "); 
-                                byte idade = scn.nextByte();
-                                System.out.print("CPF do cliente: "); 
-
-                                //Validar Cpf (44-172)
-                                int loop=0; 
-                                while(loop==0){
-                                    int  loop1=1;
-                                        while(loop1==1){   
-                                            Scanner entrada= new Scanner(System.in);
-                                            cpf= entrada.nextBigInteger();
-                                            String biStr = cpf.toString();
-                                            int[] cpf1 = new int[biStr.length()];
-                                            for(int i=0; i<biStr.length(); i++) {
-                                                cpf1[i] = Integer.parseInt(String.valueOf(biStr.charAt(i)));
-                                            }
-                                            int length = biStr.length();
-                                            if(length<11 || length>11){          
-                                                System.out.println("O cpf deve conter 11 dígitos. Insira novamente:");
-                                            }
-                                            else{
-                                                loop1++;
-                                                break;
-                                            }
-                                        }
-                                    int k=0,cpfigual=0;
-                                    int a=0,b=0,c=0,d=0,e=0,f=0,g=0,h=0,l=0,j=0;
-                                    String biStr = cpf.toString();
-                                    int[] cpf1 = new int[biStr.length()];
-                                    for(int i=0; i<biStr.length(); i++) {
-                                        cpf1[i] = Integer.parseInt(String.valueOf(biStr.charAt(i)));
-                                    }
-                                    int length = biStr.length();
-                                    if(length<11 || length>11){
-                                        System.out.println("O cpf deve conter 11 dígitos.");
-                                    }
-                                    while(k<length){
-
-                                        if(cpf1[k]==0){
-                                            a++;
-                                        }
-                                        if(cpf1[k]==1){
-                                            b++;
-                                        }
-                                        if(cpf1[k]==2){
-                                            c++;
-                                        }
-                                        if(cpf1[k]==3){
-                                            d++;
-                                        }
-                                        if(cpf1[k]==4){
-                                            e++;
-                                        }
-                                        if(cpf1[k]==5){
-                                            f++;
-                                        }
-                                        if(cpf1[k]==6){
-                                            g++;
-                                        }
-                                        if(cpf1[k]==7){
-                                            h++;
-                                        }
-                                        if(cpf1[k]==8){
-                                            l++;
-                                        }
-                                        if(cpf1[k]==9){
-                                            j++;
-                                        }
-
-                                        if(a==11||b==11||c==11||d==11||e==11||f==11||g==11||h==11||l==11||j==11){
-                                            cpfigual=1;
-                                            System.out.println("O cpf não pode conter todo os dígitos iguais!");
-                                        }
-
-                                        k++;
-                                    }
-
-                                    int y=11,z=0;
-                                    b=12;
-                                    c=0;
-
-                                    for(int x=0;x<=8;x++){
-                                        y--;
-                                        int digitoA=0, mult=0;
-                                        mult=cpf1[x]*y;
-                                        z=z+mult;
-
-                                        if(x==8){
-                                            digitoA=11-(z%11);
-
-                                            if(digitoA>=10){
-                                                digitoA=0;
-                                            }
-
-                                            if(digitoA==cpf1[9] && cpfigual!=1){
-                                                for(a=0;a<=9;a++){
-                                                    b--;
-                                                    int mult2=0,digitoB=0;
-                                                    mult2=cpf1[a]*b;
-                                                    c=c+mult2;                                   
-                                                    if(a==9){
-                                                        digitoB=11-(c%11);
-                                                        if(digitoB>=10){
-                                                            digitoB=0;
-                                                        }
-                                                        if(digitoB==cpf1[10] && cpfigual!=1){
-                                                            loop=1;
-                                                            break;
-                                                        }
-                                                        else if(digitoB!=cpf1[10] && a==9){
-                                                            System.out.println("Cpf Inválido!! Insira Novamente:");
-                                                            break;
-                                                        }
-                                                        if(a==9){
-                                                            break;
-                                                        }
-                                                    }
-
-                                                }   
-                                            }
-                                            else{
-                                                if(cpfigual==1){
-                                                    System.out.println("Insira Novamente:");
-                                                }
-                                                else{
-                                                System.out.println("Cpf Inválido!! Insira Novamente:");
-                                                }
-                                            }
-                                        }   
-                                    }
-                                }
-                      //Fim do validar cpf
-
-
-                                System.out.print("Sexo do cliente: "); 
-                                String sexo = scn.next(); 
-                                System.out.print("Número de Telefone do cliente: "); 
-                                BigInteger telefone = scn.nextBigInteger();
-                                agenda.add(new Cliente(nome,idade,cpf,sexo,telefone));
-                                System.out.println("\nCLIENTE CADASTRADO COM SUCESSO!");
-                                System.out.println("____________________________________");
-
-                            break;
-                            
+                           
                             //Buscar Clientes
-                            case 2:
+                            case 1:
 
                                 System.out.println("Sua lista tem "+agenda.size()+" clientes");
 
@@ -390,7 +437,7 @@ public class Agenda {
                             break;
                             
                             //Excluir Clientes
-                            case 3:
+                            case 2:
 
                                 System.out.print("Qual cliente vai remover: ");
                                 String rem= scn.next();
@@ -408,7 +455,7 @@ public class Agenda {
                             break;
                             
                             //Imprimir Clientes                         
-                            case 4:
+                            case 3:
 
                                 System.out.println("____________________________________");
 
@@ -423,7 +470,7 @@ public class Agenda {
                                 System.out.println("____________________________________");
 
                             break;
-                            case 5:
+                            case 4:
                                 menuC = 5;
                             break;
                             default:
