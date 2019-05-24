@@ -26,7 +26,7 @@ public class Agenda {
         byte menuP ;
         byte menuC ;
         byte menuE ;
-        int primeiroCadastro=0,loopProduto=0;
+        int primeiroCadastro=0,loopProduto=0, idVenda=0;
         
         do{
             System.out.println("1) Vendas");
@@ -63,27 +63,66 @@ public class Agenda {
                                 int w;
                                 w=scn.nextInt();
                                 
-                                //Busca Cliente em Vendas
+                                //Buscar Cliente em Vendas
                                 if(w==1){
                                                           System.out.println("Sua lista tem "+agenda.size()+" clientes");
 
                                 //verifica se o ArrayList esta vazio
                                 if (agenda.isEmpty()) {
-                                    System.out.println("Sua lista nao tem clientes");
+                                    System.out.println("Sua lista não tem clientes");
                                 }else{
 
-                                    System.out.print("Qual cliente voce deseja buscar? "); 
+                                    System.out.print("Qual cliente você deseja buscar? "); 
                                     String buscar = scn.next();
-
+                                    
                                     for (int i = 0; i <agenda.size(); i++) {
                                         Cliente idCliente =  agenda.get(i);
                                         if (idCliente.getNome().equalsIgnoreCase(buscar)) {
                                             agenda.get(i);
-                                     
-                                        }
-                                    }
-                                }
+                                            System.out.println("Digite o Código do produto");
+                                            int codigoProduto=scn.nextInt();
+                                            int produtoExiste=0;
 
+                                            //verifica se o ArrayList esta vazio
+                                            if (produtos.isEmpty()) {
+                                                System.out.println("Sua lista não tem produtos");
+                                            }else{
+                                                int buscarP = codigoProduto;
+
+                                                for (i = 0; i <produtos.size(); i++) {
+                                                    Estoque idEstoque =  produtos.get(i);
+                                                    if (idEstoque.getCodigoProduto()==buscarP) {
+                                                            produtoExiste++;
+                                                            System.out.println("Digite a Quantidade:");
+                                                            int quantidade=scn.nextInt();
+                                                            if(quantidade==0){
+                                                                System.out.println("A quantidade não pode ser zero. Por favor inicie outra venda.");
+                                                                break;
+                                                            }
+                                                            if((idEstoque.getQuantidade()-quantidade)>=0){
+                                                            idEstoque.setQuantidade(idEstoque.getQuantidade()-quantidade);
+                                                            String cor=idEstoque.getCor();
+                                                            byte tipo=idEstoque.getTipo();
+                                                            idVenda++;
+                                                            System.out.println("O ID da venda é " + idVenda);
+                                                            vendas.add(new Venda(idVenda, tipo, cor, codigoProduto, quantidade));
+                                                            System.out.println("\nVENDA CADASTRADA COM SUCESSO!");
+                                                            }
+                                                            else{
+                                                                System.out.println("O estoque tem " + idEstoque.getQuantidade() + " produto(s)!");
+                                                            }
+
+                                                    }
+
+
+                                                if(produtoExiste==0){
+                                                        System.out.println("Produto não existe");
+                                                    }
+                                            }
+                                                    }
+                                                }
+                                            }
+                                }
                                 System.out.println("_____________________________________");
 
                                     
@@ -233,7 +272,6 @@ public class Agenda {
                                 BigInteger telefone = scn.nextBigInteger();
                                 System.out.println("\nCLIENTE CADASTRADO COM SUCESSO!");
                                 System.out.println("____________________________________");
-                                int idVenda=0;
                                 idVenda++;
                                 System.out.println("Digite o Código do produto");
                                 int codigoProduto=scn.nextInt();
@@ -266,7 +304,7 @@ public class Agenda {
                                                 idEstoque.setQuantidade(idEstoque.getQuantidade()-quantidade);
                                                 String cor=idEstoque.getCor();
                                                 byte tipo=idEstoque.getTipo();
-                                                System.out.println("O id da venda é " + idVenda);
+                                                System.out.println("O ID da venda é " + idVenda);
                                                 vendas.add(new Venda(idVenda, tipo, cor, codigoProduto, quantidade));
                                                 System.out.println("\nVENDA CADASTRADA COM SUCESSO!");
                                                 }
@@ -296,14 +334,7 @@ public class Agenda {
                                 System.out.println("_____________________________________");
 
                                 
-                                /*for (int i = 0; i <agenda.size(); i++) {
-                                        Cliente idCliente =  agenda.get(i);
-                                        if (idCliente.getNome().equalsIgnoreCase(buscar)) {
-                                            agenda.get(i);
-                                     
-                                        }
-                                    }
-                                */
+                                
                                 
                                 break;
                                 
@@ -327,14 +358,14 @@ public class Agenda {
                                             
                                                 vendaExiste++;
                                                 agenda.get(i);
-                                                produtos.get(i);
+                                                vendas.get(i);
                                             System.out.printf("%-7s%10s%7s%13s%11s%13s%6s%n","Cliente", "Nome","Idade","CPF", "Sexo", "Telefone","ID");
                                             System.out.printf("       %10S%7d%13s%11s%13s%6d%n",idCliente.getNome(),idCliente.getIdade(),idCliente.getCpf(), idCliente.getSexo(), idCliente.getTelefone(),idCliente.getIdVenda());
-                                            for (i = 0; i <produtos.size(); i++) {
-                                              Venda idVenda = vendas.get(i);
-                                                if (idVenda.getIdVenda()==buscar) {
+                                            for (i = 0; i <vendas.size(); i++) {
+                                              Venda idVendas = vendas.get(i);
+                                                if (idVendas.getIdVenda()==buscar) {
                                                     System.out.printf("%-19s%6s%12s%12s%n","Código do Produto","Tipo","Cor","Quantidade");
-                                                    System.out.printf("%-19d%6s%12s%12d%n",idVenda.getCodigoProduto(),"Camisa",idVenda.getCor(),idVenda.getQuantidade());
+                                                    System.out.printf("%-19d%6s%12s%12d%n",idVendas.getCodigoProduto(),"Camisa",idVendas.getCor(),idVendas.getQuantidade());
                                                 }
                                             }
                                                    }    
@@ -349,6 +380,30 @@ public class Agenda {
                                 
                             case 3:
                                 //Excluir Venda
+                                if (vendas.isEmpty()) {
+                                    System.out.println("Sua lista não tem vendas");
+                                }else{
+                                
+                                    System.out.print("Qual venda vai remover? Insira o ID: ");
+                                    int rem= scn.nextInt();
+
+
+
+                                    for (int i = 0; i <vendas.size(); i++) {
+                                        Venda idVendas =  vendas.get(i);
+                                        if (idVendas.getIdVenda()==rem) {
+                                            produtos.remove(i);
+                                            System.out.println("removido");
+                                            
+                                        }
+                                        else{
+                                            System.out.println("Venda não existe");
+                                        }
+                                    }
+                                    }
+
+                                System.out.println("____________________________________");
+
                                 break;
                             case 4:                                
                                 menuV=4;
@@ -404,7 +459,7 @@ public class Agenda {
                                     System.out.println("Insira a quantidade:");
                                     quantidade=scn.nextInt();
                                     }
-
+                                    System.out.println("PRODUTO CADASTRADO COM SUCESSO!");
                                 produtos.add(new Estoque(tipo,cor,codigoProduto,quantidade));
                                 primeiroCadastro++;
                                 }        
@@ -546,7 +601,7 @@ public class Agenda {
                         menuC = scn.nextByte();
 
                         //Msg de erro
-                        if(menuC==0 || menuC>1){
+                        if(menuC==0 || menuC>4){
                            System.out.println("Número inválido");
                        }
 
