@@ -9,12 +9,14 @@ public class Estoque {
     String cor;
     int codigoProduto;
     int quantidade=0;
+    float preco;
     
-    public Estoque(byte tipo, String cor,int codigoProduto, int quantidade){
+    public Estoque(byte tipo, String cor,int codigoProduto, int quantidade,float preco){
         this.tipo = tipo;
         this.cor = cor;
         this.codigoProduto = codigoProduto;
         this.quantidade=quantidade;
+        this.preco=preco;
        
     }
 
@@ -42,6 +44,13 @@ public class Estoque {
     public int getQuantidade() {
         return quantidade;
     }
+     public void setPreco(float preco) {
+        this.preco= preco;
+    }
+    public float getPreco() {
+        return preco;
+    }
+  
     
     
     

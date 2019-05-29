@@ -13,8 +13,9 @@ public class Venda extends Estoque implements ClienteInt {
     
     
     
-    public Venda(int idVenda,byte tipo, String cor,int codigoProduto, int quantidade, String nome ,byte idade,BigInteger cpf,String sexo, BigInteger telefone){ 
-        super(tipo, cor, codigoProduto, quantidade);
+    public Venda(int idVenda,byte tipo, String cor,int codigoProduto, int quantidade,
+            String nome ,byte idade,BigInteger cpf,String sexo, BigInteger telefone, float preco){ 
+        super(tipo, cor, codigoProduto, quantidade,preco);
         this.idVenda= idVenda;
         this.tipo = tipo;
         this.cor = cor;
@@ -26,6 +27,7 @@ public class Venda extends Estoque implements ClienteInt {
         this.telefone = telefone;
         this.sexo = sexo;
         this.idVenda = idVenda;
+        this.preco = preco;
     }
     
     @Override
