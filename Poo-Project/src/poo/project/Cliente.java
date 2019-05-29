@@ -9,7 +9,7 @@ public class Cliente {
     private BigInteger cpf;
     private int idVenda;
 
-    public Cliente (String nome ,byte idade,BigInteger cpf,String sexo, BigInteger telefone, int idVenda) {
+    public Cliente (String nome ,byte idade,BigInteger cpf,String sexo, BigInteger telefone) {
         
         
         
@@ -19,7 +19,7 @@ public class Cliente {
         this.idade = idade;
         this.telefone = telefone;
         this.sexo = sexo;
-        this.idVenda = idVenda;
+       
     }
     
     
