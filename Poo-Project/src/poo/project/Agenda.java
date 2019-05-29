@@ -383,12 +383,12 @@ public class Agenda {
                                               idVendas = vendas.get(i);
                                                 if (idVendas.getIdVenda()==buscar) {
                                                   if(idVendas.getTipo()==1){
-                                                    System.out.printf("%-30s%7s%11s%19s%n","Código do Produto","Tipo","Cor","Quantidade");
-                                                    System.out.printf("%-30d%7s%11s%19d%n",idVendas.getCodigoProduto(),"Camisa",idVendas.getCor(),idVendas.getQuantidade());
+                                                    System.out.printf("%-30s%7s%11s%15s%8s%n","Código do Produto","Tipo","Cor","Quantidade","Preço");
+                                                    System.out.printf("%-30d%7s%11s%15d%8.2f%n",idVendas.getCodigoProduto(),"Camisa",idVendas.getCor(),idVendas.getQuantidade(),idVendas.getPreco());
                                                   }
                                                   if(idVendas.getTipo()==2){
-                                                    System.out.printf("%-30s%7s%11s%19s%n","Código do Produto","Tipo","Cor","Quantidade");
-                                                    System.out.printf("%-30d%7s%11s%19d%n",idVendas.getCodigoProduto(),"Calça",idVendas.getCor(),idVendas.getQuantidade());
+                                                    System.out.printf("%-30s%7s%11s%15s%8s%n","Código do Produto","Tipo","Cor","Quantidade","Preço");
+                                                    System.out.printf("%-30d%7s%11s%15d%8.2f%n",idVendas.getCodigoProduto(),"Calça",idVendas.getCor(),idVendas.getQuantidade(),idVendas.getPreco());
                                                   } 
                                                 }
                                             }
@@ -563,13 +563,13 @@ public class Agenda {
                                         if (idEstoque.getCodigoProduto()==buscar) {
                                             if(idEstoque.getTipo()==1){
                                                 produtoExiste++;
-                                                System.out.printf("%-6s%12s%12s%7s%n","Tipo","Cor","Quantidade","Preço");
-                                                System.out.printf("%-6s%12s%12d%7f%n","Camisa",idEstoque.getCor(),idEstoque.getQuantidade(),idEstoque.getPreco());
+                                                System.out.printf("%-6s%12s%13s%8s%n","Tipo","Cor","Quantidade","Preço");
+                                                System.out.printf("%-6s%12s%13d%8.2f%n","Camisa",idEstoque.getCor(),idEstoque.getQuantidade(),idEstoque.getPreco());
                                             }
                                             if(idEstoque.getTipo()==2){
                                                produtoExiste++;
-                                                System.out.printf("%-5s%12s%12s%7s%n","Tipo","Cor","Quantidade","Preço");
-                                                System.out.printf("%-5s%12s%12d&7f%n","Calça",idEstoque.getCor(),idEstoque.getQuantidade(),idEstoque.getPreco());
+                                                System.out.printf("%-5s%12s%13s%8s%n","Tipo","Cor","Quantidade","Preço");
+                                                System.out.printf("%-5s%12s%13d&8.2f%n","Calça",idEstoque.getCor(),idEstoque.getQuantidade(),idEstoque.getPreco());
                                             }
                                         }
                                         
