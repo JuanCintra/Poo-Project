@@ -9,7 +9,7 @@ public class Cliente {
     private BigInteger cpf;
     private int idVenda;
 
-    public Cliente(String nome ,byte idade,BigInteger cpf,String sexo, BigInteger telefone, int idVenda) {
+    public Cliente (String nome ,byte idade,BigInteger cpf,String sexo, BigInteger telefone, int idVenda) {
         
         
         
@@ -47,7 +47,7 @@ public class Cliente {
     public byte getIdade() {
         return idade;
     }
-    public void setSexo(String Sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
     public String getSexo() {
@@ -66,7 +66,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" + "nome=" + nome + ", CPF=" + cpf + ", telefone=" + telefone + '}';
+        return "Cliente1{" + "nome=" + nome + ", CPF=" + cpf + ", telefone=" + telefone + '}';
     }
     
 }

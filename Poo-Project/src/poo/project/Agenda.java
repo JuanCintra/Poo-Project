@@ -66,28 +66,25 @@ public class Agenda {
                                 //Buscar Cliente em Vendas
                                 if(loopVenda==0){
                                 if(w==1){
-                                  System.out.println("Sua lista tem "+agenda.size()+" clientes");
+                                  System.out.println("Sua lista tem "+vendas.size()+" clientes");
 
                                 //verifica se o ArrayList esta vazio
-                                if (agenda.isEmpty()) {
+                                if (vendas.isEmpty()) {
                                     System.out.println("Sua lista não tem clientes");
                                 }else{
 
                                     System.out.print("Qual cliente você deseja buscar? "); 
                                     String buscar = scn.next();
                                     
-                                    for (int i = 0; i <agenda.size(); i++) {
-                                        Cliente idCliente =  agenda.get(i);
-                                        if (idCliente.getNome().equalsIgnoreCase(buscar)) {
-                                            agenda.get(i);
-                                            String nome=idCliente.getNome();
-                                            byte idade=idCliente.getIdade();
-                                            String sexo=idCliente.getSexo();
-                                            cpf=idCliente.getCpf();
-                                            BigInteger telefone=idCliente.getTelefone();
-                                            idVenda++;
-                                            
-                                           
+                                    for (int i = 0; i <vendas.size(); i++) {
+                                        Venda idVendas =  vendas.get(i);
+                                        if (idVendas.getNome().equalsIgnoreCase(buscar)) {
+                                            vendas.get(i);
+                                            String nome=idVendas.getNome();
+                                            byte idade=idVendas.getIdade();
+                                            String sexo=idVendas.getSexo();
+                                            cpf=idVendas.getCpf();
+                                            BigInteger telefone=idVendas.getTelefone();
                                             System.out.println("Digite o Código do produto");
                                             int codigoProduto=scn.nextInt();
                                             int produtoExiste=0;
@@ -113,9 +110,9 @@ public class Agenda {
                                                             idEstoque.setQuantidade(idEstoque.getQuantidade()-quantidade);
                                                             String cor=idEstoque.getCor();
                                                             byte tipo=idEstoque.getTipo();
+                                                            idVenda++;
                                                             System.out.println("O ID da venda é " + idVenda);
-                                                            agenda.add(new Cliente(nome,idade,cpf,sexo,telefone,idVenda));
-                                                            vendas.add(new Venda(idVenda, tipo, cor, codigoProduto, quantidade));
+                                                            vendas.add(new Venda(idVenda, tipo, cor, codigoProduto, quantidade,nome,idade,cpf,sexo,telefone));
                                                             System.out.println("\nVENDA CADASTRADA COM SUCESSO!");
                                                             }
                                                             else{
@@ -144,7 +141,7 @@ public class Agenda {
                         }
                            
                               if(w==2){
-                                    //Cadastrar clientes
+                                //Cadastrar clientes
                                 System.out.print("Nome do cliente: "); 
                                 String nome = scn.next();
                                 System.out.print("Idade do cliente: "); 
@@ -285,9 +282,6 @@ public class Agenda {
                                 String sexo = scn.next(); 
                                 System.out.print("Número de Telefone do cliente: "); 
                                 BigInteger telefone = scn.nextBigInteger();
-                                System.out.println("\nCLIENTE CADASTRADO COM SUCESSO!");
-                                System.out.println("____________________________________");
-                                idVenda++;
                                 System.out.println("Digite o Código do produto");
                                 int codigoProduto=scn.nextInt();
                                 
@@ -319,9 +313,10 @@ public class Agenda {
                                                 idEstoque.setQuantidade(idEstoque.getQuantidade()-quantidade);
                                                 String cor=idEstoque.getCor();
                                                 byte tipo=idEstoque.getTipo();
+                                                idVenda++;
                                                 System.out.println("O ID da venda é " + idVenda);
-                                                vendas.add(new Venda(idVenda, tipo, cor, codigoProduto, quantidade));
-                                                agenda.add(new Cliente(nome,idade,cpf,sexo,telefone,idVenda));
+                                                vendas.add(new Venda(idVenda, tipo, cor, codigoProduto, quantidade,nome,idade,cpf,sexo,telefone));
+                                                
                                                 System.out.println("\nVENDA CADASTRADA COM SUCESSO!");
                                                 }
                                                 else{
@@ -367,19 +362,18 @@ public class Agenda {
                                     int buscar = scn.nextInt();
 
                                     for (int i = 0; i <vendas.size(); i++) {
-                                        Cliente idCliente =  agenda.get(i);
+                                        Venda idVendas =  vendas.get(i);
                                         
 
-                                        if (idCliente.getIdVenda()==buscar) {
+                                        if (idVendas.getIdVenda()==buscar) {
                                             
                                                 vendaExiste++;
-                                                agenda.get(i);
                                                 vendas.get(i);
                                             System.out.printf("%-7s%10s%7s%13s%11s%13s%6s%n","Cliente", "Nome","Idade","CPF", "Sexo", "Telefone","ID");
-                                            System.out.printf("       %10S%7d%13s%11s%13s%6d%n%n",idCliente.getNome(),idCliente.getIdade(),
-                                                    idCliente.getCpf(), idCliente.getSexo(), idCliente.getTelefone(),idCliente.getIdVenda());
+                                            System.out.printf("       %10S%7d%13s%11s%13s%6d%n%n",idVendas.getNome(),idVendas.getIdade(),
+                                                    idVendas.getCpf(), idVendas.getSexo(), idVendas.getTelefone(),idVendas.getIdVenda());
                                             for (i = 0; i <vendas.size(); i++) {
-                                              Venda idVendas = vendas.get(i);
+                                              idVendas = vendas.get(i);
                                                 if (idVendas.getIdVenda()==buscar) {
                                                     System.out.printf("%-30s%6s%12s%19s%n","Código do Produto","Tipo","Cor","Quantidade");
                                                     System.out.printf("%-30d%6s%12s%19d%n",idVendas.getCodigoProduto(),"Camisa",idVendas.getCor(),idVendas.getQuantidade());
@@ -627,22 +621,23 @@ public class Agenda {
                             //Buscar Clientes
                             case 1:
 
-                                System.out.println("Sua lista tem "+agenda.size()+" clientes");
+                                System.out.println("Sua lista tem "+vendas.size()+" clientes");
 
                                 //verifica se o ArrayList esta vazio
-                                if (agenda.isEmpty()) {
+                                if (vendas.isEmpty()) {
                                     System.out.println("Sua lista nao tem clientes");
                                 }else{
 
                                     System.out.print("Qual cliente voce deseja buscar? "); 
                                     String buscar = scn.next();
 
-                                    for (int i = 0; i <agenda.size(); i++) {
-                                        Cliente idCliente =  agenda.get(i);
-                                        if (idCliente.getNome().equalsIgnoreCase(buscar)) {
-                                            agenda.get(i);
+                                    for (int i = 0; i <vendas.size(); i++) {
+                                        Venda idVendas =  vendas.get(i);
+                                        if (idVendas.getNome().equalsIgnoreCase(buscar)) {
+                                            vendas.get(i);
                                             System.out.printf("%-10s%7s%13s%11s%13s%n", "Nome","Idade","CPF", "Sexo", "Telefone");
-                                            System.out.printf("%-10S%7d%13s%11s%13s%n" ,idCliente.getNome(),idCliente.getIdade(),idCliente.getCpf(), idCliente.getSexo(), idCliente.getTelefone());
+                                            System.out.printf("%-10S%7d%13s%11s%13s%n" ,idVendas.getNome(),idVendas.getIdade(),
+                                                    idVendas.getCpf(), idVendas.getSexo(), idVendas.getTelefone());
                                         }
                                     }
                                 }
@@ -657,11 +652,11 @@ public class Agenda {
                                 System.out.print("Qual cliente vai remover: ");
                                 String rem= scn.next();
 
-                                for (int i = 0; i <agenda.size(); i++) {
-                                    Cliente idCliente =  agenda.get(i);
-                                    if (idCliente.getNome().equalsIgnoreCase(rem)) {
-                                        agenda.remove(i);
-                                        System.out.println("removido");
+                                for (int i = 0; i <vendas.size(); i++) {
+                                    Venda idVendas =  vendas.get(i);
+                                    if (idVendas.getNome().equalsIgnoreCase(rem)) {
+                                        vendas.remove(i);
+                                        System.out.println("Removido.");
                                     }
                                 }
 
@@ -677,7 +672,7 @@ public class Agenda {
                                 System.out.printf("%-10s%10s%7s%13s%11s%13s%n","Nº", "Nome","Idade","CPF", "Sexo", "Telefone");
                                 int n = 0;
 
-                                for(Cliente a : agenda){
+                                for(Venda a : vendas){
                                     n++;
 
                                     System.out.printf("%-10d%10S%7d%13s%11s%13s%n", n ,a.getNome(), a.getIdade(),a.getCpf(), a.getSexo(), a.getTelefone());
