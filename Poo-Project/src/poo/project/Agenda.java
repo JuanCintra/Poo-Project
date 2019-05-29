@@ -375,12 +375,18 @@ public class Agenda {
                                             for (i = 0; i <vendas.size(); i++) {
                                               idVendas = vendas.get(i);
                                                 if (idVendas.getIdVenda()==buscar) {
-                                                    System.out.printf("%-30s%6s%12s%19s%n","Código do Produto","Tipo","Cor","Quantidade");
-                                                    System.out.printf("%-30d%6s%12s%19d%n",idVendas.getCodigoProduto(),"Camisa",idVendas.getCor(),idVendas.getQuantidade());
+                                                  if(idVendas.getTipo()==1){
+                                                    System.out.printf("%-30s%7s%12s%19s%n","Código do Produto","Tipo","Cor","Quantidade");
+                                                    System.out.printf("%-30d%7s%12s%19d%n",idVendas.getCodigoProduto(),"Camisa",idVendas.getCor(),idVendas.getQuantidade());
+                                                  }
+                                                  if(idVendas.getTipo()==2){
+                                                    System.out.printf("%-30s%7s%12s%19s%n","Código do Produto","Tipo","Cor","Quantidade");
+                                                    System.out.printf("%-30d%7s%12s%19d%n",idVendas.getCodigoProduto(),"Calça",idVendas.getCor(),idVendas.getQuantidade());
+                                                  } 
                                                 }
                                             }
-                                                   }    
-                                            }
+                                        }    
+                                    }
                                     if(vendaExiste==0){
                                             System.out.println("Venda não existe");
                                         }
