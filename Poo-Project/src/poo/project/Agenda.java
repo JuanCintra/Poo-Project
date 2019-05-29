@@ -13,18 +13,20 @@ public class Agenda {
         
         ArrayList<Cliente> agenda = new ArrayList();
         ArrayList<Estoque> produtos = new ArrayList();
+        ArrayList<Venda> vendas = new ArrayList();
+      
         Scanner scn = new Scanner(System.in);
     
         byte menuV ;
         byte menuP ;
         byte menuC ;
         byte menuE ;
-        int quantidadeCam=0,quantidadeCal=0;
+        int primeiroCadastro=0,loopProduto=0, idVenda=0;
         
         do{
             System.out.println("1) Vendas");
             System.out.println("2) Estoque");
-            System.out.println("3) Cadastrar Cliente");
+            System.out.println("3) Clientes");
             System.out.println("4) Sair");
             System.out.println("____________________________________");
             
@@ -51,165 +53,87 @@ public class Agenda {
                        }
                         switch(menuV){
                             case 1:
-                                break;
-                            case 2:
-                                break;                                
-                            case 3:
-                                break;
-                            case 4:                                
-                                menuV=4;
-                                break;
-                            default: 
-                                menuV=0;
-                                break;
-                        }
-                    }
-                    while(menuV!=4);
-                break;
-        
-                //Estoque
-                case 2:
-                    //Começo do case 2 (
-
-                    do{
-                        System.out.println("1) Cadastrar Produto");
-                        System.out.println("2) Buscar Produto");
-                        System.out.println("3) Excluir Produto");
-                        System.out.println("4) Voltar");  
-                        System.out.println("____________________________________");
-                        menuE=scn.nextByte();
-                        if(menuE==0||menuE>4){
-                           System.out.println("Número inválido");
-                       }
-                        switch(menuE){
-                            //Cadastrar Produto
-                            case 1:
-                                String cor;
+                                //Começo do Case 1 Vendas
+                                System.out.println("Cliente já tem cadastro?\n1 - Sim\n2 - Não");
+                                int w,loopVenda=0;
+                                w=scn.nextInt();
                                 
-                                System.out.println("Insira o Tipo do produto\n 1) Camisa\n 2) Calça");
-                                byte tipo=scn.nextByte();
-                                //Camisa ou Calça
-                                if(tipo==1){
-                                    System.out.println("Insira a cor da Camisa");
-                                    cor=scn.next();
-                                    quantidadeCam++;
-                                }
-                                else{
-                                    System.out.println("Insira a cor da Calça");
-                                    cor=scn.next();
-                                    quantidadeCal++;
-                                }
-                                System.out.println("Insira o código do produto");
-                                int codigoProduto=scn.nextInt();
-                                
-                                produtos.add(new Estoque(tipo,cor,codigoProduto));
-
-                                break;
-                                
-                            //Buscar Produto    
-                            case 2:
-                                System.out.println("Sua lista tem "+produtos.size()+" produtos");
+                                //Buscar Cliente em Vendas
+                                if(loopVenda==0){
+                                if(w==1){
+                                  System.out.println("Sua lista tem "+vendas.size()+" clientes");
 
                                 //verifica se o ArrayList esta vazio
-                                if (produtos.isEmpty()) {
-                                    System.out.println("Sua lista não tem produtos");
+                                if (agenda.isEmpty()) {
+                                    System.out.println("Sua lista não tem clientes");
                                 }else{
 
-                                    System.out.print("Insira o código do produto: ");
-                                    int buscar = scn.nextInt();
+                                    System.out.print("Qual cliente você deseja buscar? "); 
+                                    String buscar = scn.next();
+                                    
+                                    for (int i = 0; i <agenda.size(); i++) {
+                                        Cliente idCliente =  agenda.get(i);
+                                        if (idCliente.getNome().equalsIgnoreCase(buscar)) {
+                                            vendas.get(i);
+                                            String nome=idCliente.getNome();
+                                            byte idade=idCliente.getIdade();
+                                            String sexo=idCliente.getSexo();
+                                            cpf=idCliente.getCpf();
+                                            BigInteger telefone=idCliente.getTelefone();
+                                            System.out.println("Digite o Código do produto");
+                                            int codigoProduto=scn.nextInt();
+                                            int produtoExiste=0;
 
-                                    for (int i = 0; i <produtos.size(); i++) {
-                                        Estoque idEstoque =  produtos.get(i);
-                                       
+                                            //verifica se o ArrayList esta vazio
+                                            if (produtos.isEmpty()) {
+                                                System.out.println("Sua lista não tem produtos");
+                                            }else{
+                                                int buscarP = codigoProduto;
 
-                                        if (idEstoque.getCodigoProduto()==buscar) {
-                                            if(idEstoque.getTipo()==1){
-                                                
-                                                System.out.printf("%-6s%12s%12s%n","Tipo","Cor","Quantidade");
-                                                System.out.printf("%-6s%12s%12d%n","Camisa",idEstoque.getCor(),quantidadeCam);
+                                                for (i = 0; i <produtos.size(); i++) {
+                                                    Estoque idEstoque =  produtos.get(i);
+                                                    if (idEstoque.getCodigoProduto()==buscarP) {
+                                                            produtoExiste++;
+                                                            System.out.println("Digite a Quantidade:");
+                                                            int quantidade=scn.nextInt();
+                                                            while(quantidade==0){
+                                                                System.out.println("A quantidade não pode ser zero. Insira Novamente:");
+                                                                quantidade=scn.nextInt();
+                                                            }
+                                                            
+                                                            if((idEstoque.getQuantidade()-quantidade)>=0){
+                                                            idEstoque.setQuantidade(idEstoque.getQuantidade()-quantidade);
+                                                            String cor=idEstoque.getCor();
+                                                            byte tipo=idEstoque.getTipo();
+                                                            idVenda++;
+                                                            System.out.println("O ID da venda é " + idVenda);
+                                                            vendas.add(new Venda(idVenda, tipo, cor, codigoProduto, quantidade,nome,idade,cpf,sexo,telefone));
+                                                            System.out.println("\nVENDA CADASTRADA COM SUCESSO!");
+                                                            }
+                                                            else{
+                                                                System.out.println("O estoque tem " + idEstoque.getQuantidade() + " produto(s)!");
+                                                                loopVenda++;
+                                                            }
+
+                                                    } 
                                             }
-                                            if(idEstoque.getTipo()==2){
-                                                System.out.printf("%-5s%12s%12s%n","Tipo","Cor","Quantidade");
-                                                System.out.printf("%-5s%12s%12d%n","Calça",idEstoque.getCor(),quantidadeCal);
-                                            }
-                                        }
+                                                if(produtoExiste==0){
+                                                        System.out.println("Produto não existe");
+                                                    }
+                                                    }
+                                                }
                                         else{
-                                            System.out.println("Produto não existe");
+                                            System.out.println("Cliente não existe.");
                                         }
-                                    }
+                                            }
                                 }
-
-                                System.out.println("_____________________________________");
-
-                                break;
                                 
-                            //Excluir Produto
-                            case 3:
-                                if (produtos.isEmpty()) {
-                                    System.out.println("Sua lista não tem produtos");
-                                }else{
-                                
-                                    System.out.print("Qual produto vai remover? Insira o código: ");
-                                    int rem= scn.nextInt();
 
-
-
-                                    for (int i = 0; i <produtos.size(); i++) {
-                                        Estoque idEstoque =  produtos.get(i);
-                                        if (idEstoque.getCodigoProduto()==rem) {
-                                            produtos.remove(i);
-                                            System.out.println("removido");
-                                            if(idEstoque.getTipo()==1){
-                                                quantidadeCam--;
-                                            }
-                                            if(idEstoque.getTipo()==2){
-                                                quantidadeCal--;
-                                            }
-                                        }
-                                        else{
-                                            System.out.println("Produto não existe");
-                                        }
-                                    }
-                                    }
-
-                                System.out.println("____________________________________");
-
-                            break;
-                            
-                               
-                            case 4:                                
-                                menuE=4;
-                                break;
-                            default:
-                                menuE=0;
-                        }                                                
-                    }
-                    while(menuE!=4);
-                    break;
-                    
-                    
-                //Cadastrar Cliente    
-                case 3:
-                    //Começo do case 3 (30-260)
-                    do {
-                        //menu
-                        System.out.println("1) Cadastrar cliente");
-                        System.out.println("2) Buscar cliente");
-                        System.out.println("3) Excluir cliente");
-                        System.out.println("4) Imprimir cliente");
-                        System.out.println("5) Voltar");
-
-                        System.out.println("____________________________________");
-
-                        menuC = scn.nextByte();
-
-                        //Msg de erro
-                        if(menuC==0 || menuC>5){
-                           System.out.println("Número inválido");
-                       }
-
-                        switch(menuC){
-                            case 1:
+                                    
+                                }
+                        }
+                           
+                              if(w==2){
                                 //Cadastrar clientes
                                 System.out.print("Nome do cliente: "); 
                                 String nome = scn.next();
@@ -351,14 +275,354 @@ public class Agenda {
                                 String sexo = scn.next(); 
                                 System.out.print("Número de Telefone do cliente: "); 
                                 BigInteger telefone = scn.nextBigInteger();
-                                agenda.add(new Cliente(nome,idade,cpf,sexo,telefone));
-                                System.out.println("\nCLIENTE CADASTRADO COM SUCESSO!");
+                                System.out.println("Digite o Código do produto");
+                                int codigoProduto=scn.nextInt();
+                                int produtoExiste=0;
+                                
+                                //verifica se o ArrayList esta vazio
+                                if (produtos.isEmpty()) {
+                                    System.out.println("Sua lista não tem produtos");
+                                }else{
+
+                                    int buscar = codigoProduto;
+
+                                    for (int i = 0; i <produtos.size(); i++) {
+                                        Estoque idEstoque =  produtos.get(i);
+                                        
+                                        
+
+                                        if (idEstoque.getCodigoProduto()==buscar) {
+                                                produtoExiste++;
+                                                System.out.println("Digite a Quantidade:");
+                                                int quantidade=scn.nextInt();
+                                                if(quantidade==0){
+                                                    System.out.println("A quantidade não pode ser zero. Venda Interrompida.");
+                                                    break;
+                                                }
+                                                if((idEstoque.getQuantidade()-quantidade)>=0){
+                                                idEstoque.setQuantidade(idEstoque.getQuantidade()-quantidade);
+                                                String cor=idEstoque.getCor();
+                                                byte tipo=idEstoque.getTipo();
+                                                idVenda++;
+                                                System.out.println("O ID da venda é " + idVenda);
+                                                agenda.add(new Cliente(nome,idade,cpf,sexo,telefone));
+                                                vendas.add(new Venda(idVenda, tipo, cor, codigoProduto, quantidade,nome,idade,cpf,sexo,telefone));
+                                                
+                                                System.out.println("\nVENDA CADASTRADA COM SUCESSO!");
+                                                }
+                                                else{
+                                                    System.out.println("O estoque tem " + idEstoque.getQuantidade() + " produto(s)!");
+                                                }
+                                           
+                                        }  
+                                }
+                                    if(produtoExiste==0 ){
+                                            System.out.println("Produto não existe. Venda Interrompida");
+                                        }
+                                }
+                                
+                                
+                                
+                                
+                                
+                                  
+                              }
+                                  //fim do cadastrar cliente
+                               
+                           
+                                
+                                System.out.println("_____________________________________");
+
+                                
+                                
+                                
+                                break;
+                                
+                            case 2:
+                                //Buscar Venda
+                                
+                                int vendaExiste=0;
+                                //verifica se o ArrayList esta vazio
+                                if (vendas.isEmpty()) {
+                                    System.out.println("Sua lista não tem vendas");
+                                }else{
+
+                                    System.out.print("Insira o ID da Venda: ");
+                                    int buscar = scn.nextInt();
+
+                                    for (int i = 0; i <vendas.size(); i++) {
+                                        Venda idVendas =  vendas.get(i);
+                                        
+
+                                        if (idVendas.getIdVenda()==buscar) {
+                                            
+                                                vendaExiste++;
+                                                vendas.get(i);
+                                            System.out.printf("%-7s%10s%7s%13s%11s%13s%6s%n","Cliente", "Nome","Idade","CPF", "Sexo", "Telefone","ID");
+                                            System.out.printf("       %10S%7d%13s%11s%13s%6d%n%n",idVendas.getNome(),idVendas.getIdade(),
+                                                    idVendas.getCpf(), idVendas.getSexo(), idVendas.getTelefone(),idVendas.getIdVenda());
+                                            for (i = 0; i <vendas.size(); i++) {
+                                              idVendas = vendas.get(i);
+                                                if (idVendas.getIdVenda()==buscar) {
+                                                  if(idVendas.getTipo()==1){
+                                                    System.out.printf("%-30s%7s%11s%19s%n","Código do Produto","Tipo","Cor","Quantidade");
+                                                    System.out.printf("%-30d%7s%11s%19d%n",idVendas.getCodigoProduto(),"Camisa",idVendas.getCor(),idVendas.getQuantidade());
+                                                  }
+                                                  if(idVendas.getTipo()==2){
+                                                    System.out.printf("%-30s%7s%11s%19s%n","Código do Produto","Tipo","Cor","Quantidade");
+                                                    System.out.printf("%-30d%7s%11s%19d%n",idVendas.getCodigoProduto(),"Calça",idVendas.getCor(),idVendas.getQuantidade());
+                                                  } 
+                                                }
+                                            }
+                                        }    
+                                    }
+                                    if(vendaExiste==0){
+                                            System.out.println("Venda não existe");
+                                        }
+                                }
+                                
+                                System.out.println("_____________________________________");
+                                break;        
+                                
+                            case 3:
+                                //Excluir Venda
+                                vendaExiste=0;
+                                if (vendas.isEmpty()) {
+                                    System.out.println("Sua lista não tem vendas");
+                                }else{
+                                
+                                    System.out.print("Qual venda vai remover? Insira o ID: ");
+                                    int rem= scn.nextInt();
+
+                                    for (int i = 0; i <vendas.size(); i++) {
+                                        Venda idVendas =  vendas.get(i);
+                                        if (idVendas.getIdVenda()==rem) {
+                                            vendaExiste++;
+                                            vendas.remove(i);
+                                            System.out.println("Venda removida.");
+                                            
+                                        }
+                                    }
+                                    if(vendaExiste==0){
+                                            System.out.println("Venda não existe");
+                                        }
+                                    }
+
+                                System.out.println("____________________________________");
+
+                                break;
+                            case 4:                                
+                                menuV=4;
+                                break;
+                            default: 
+                                menuV=0;
+                                break;
+                        }
+                    }
+                    while(menuV!=4);
+                break;
+        
+                //Estoque
+                case 2:
+                    //Começo do case 2 (
+
+                    do{
+                        System.out.println("1) Cadastrar Produto");
+                        System.out.println("2) Buscar Produto");
+                        System.out.println("3) Excluir Produto");
+                        System.out.println("4) Voltar");  
+                        System.out.println("____________________________________");
+                        menuE=scn.nextByte();
+                        if(menuE==0||menuE>4){
+                           System.out.println("Número inválido");
+                       }
+                        switch(menuE){
+                            //Cadastrar Produto
+                            case 1:
+                                String cor;
+                                int quantidade=0;
+                                System.out.println("Insira o código do produto:");
+                                int codigoProduto=scn.nextInt();
+                                
+                                //Se o produto já existir
+                                
+                                //Se não
+                                if(primeiroCadastro==0){
+                                System.out.println("Insira o Tipo do produto:\n 1) Camisa\n 2) Calça");
+                                byte tipo=scn.nextByte();
+                                while(tipo>2 || tipo<1){
+                                    System.out.println("O Tipo do produto só pode ser Camisa ou Calça. Insira o Tipo do produto novamente:\n 1) Camisa\n 2) Calça");
+                                    tipo=scn.nextByte();
+                                }
+                                //Camisa ou Calça
+                                if(tipo==1){
+                                    System.out.println("Insira a cor da Camisa:");
+                                    cor=scn.next();  
+                                    System.out.println("Insira a quantidade:");
+                                    quantidade=scn.nextInt();
+                                    
+                                }
+                                else{
+                                    System.out.println("Insira a cor da Calça:");
+                                    cor=scn.next();
+                                    System.out.println("Insira a quantidade:");
+                                    quantidade=scn.nextInt();
+                                    }
+                                    System.out.println("PRODUTO CADASTRADO COM SUCESSO!");
+                                produtos.add(new Estoque(tipo,cor,codigoProduto,quantidade));
+                                primeiroCadastro++;
+                                }        
+                                
+                                
+                                else{
+                                for(int i=0;i<produtos.size();i++){
+                                    Estoque idEstoque = produtos.get(i);
+                                    if(idEstoque.getCodigoProduto()==codigoProduto){
+                                        
+                                        loopProduto++;
+                                        System.out.println("Insira a quantidade:");
+                                        quantidade=scn.nextInt();
+                                        int quantidadeEstoque=idEstoque.getQuantidade();
+                                        idEstoque.setQuantidade(quantidadeEstoque+=quantidade);
+                                        }
+                                    
+                                        
+                                    
+                                    }
+                                 if(loopProduto==0){
+                                     System.out.println("Insira o Tipo do produto:\n 1) Camisa\n 2) Calça");
+                                byte tipo=scn.nextByte();
+                                //Erro para o tipo da roupa
+                                while(tipo>2 || tipo<1){
+                                    System.out.println("O Tipo do produto só pode ser Camisa ou Calça. Insira o Tipo do produto novamente:\n 1) Camisa\n 2) Calça");
+                                    tipo=scn.nextByte();
+                                }
+
+                                //Camisa ou Calça
+                                if(tipo==1){
+                                    System.out.println("Insira a cor da Camisa:");
+                                    cor=scn.next();  
+                                    System.out.println("Insira a quantidade:");
+                                    quantidade=scn.nextInt();
+                                }
+                                else{
+                                    System.out.println("Insira a cor da Calça:");
+                                    cor=scn.next();
+                                    System.out.println("Insira a quantidade:");
+                                    quantidade=scn.nextInt();
+                                    }
+
+                                produtos.add(new Estoque(tipo,cor,codigoProduto,quantidade));
+                                 }
+                                    
+                                }
+                                 
+                    
+                                loopProduto=0;
+                                break;
+                                
+                            //Buscar Produto    
+                            case 2:
+                                System.out.println("Sua lista tem "+produtos.size()+" produtos");
+                                int produtoExiste=0;
+                                //verifica se o ArrayList esta vazio
+                                if (produtos.isEmpty()) {
+                                    System.out.println("Sua lista não tem produtos");
+                                }else{
+
+                                    System.out.print("Insira o código do produto: ");
+                                    int buscar = scn.nextInt();
+
+                                    for (int i = 0; i <produtos.size(); i++) {
+                                        Estoque idEstoque =  produtos.get(i);
+                                        
+
+                                        if (idEstoque.getCodigoProduto()==buscar) {
+                                            if(idEstoque.getTipo()==1){
+                                                produtoExiste++;
+                                                System.out.printf("%-6s%12s%12s%n","Tipo","Cor","Quantidade");
+                                                System.out.printf("%-6s%12s%12d%n","Camisa",idEstoque.getCor(),idEstoque.getQuantidade());
+                                            }
+                                            if(idEstoque.getTipo()==2){
+                                               produtoExiste++;
+                                                System.out.printf("%-5s%12s%12s%n","Tipo","Cor","Quantidade");
+                                                System.out.printf("%-5s%12s%12d%n","Calça",idEstoque.getCor(),idEstoque.getQuantidade());
+                                            }
+                                        }
+                                        
+                                    }
+                                    if(produtoExiste==0){
+                                            System.out.println("Produto não existe");
+                                        }
+                                }
+                                
+                                System.out.println("_____________________________________");
+
+                                break;
+                                
+                            //Excluir Produto
+                            case 3:
+                                produtoExiste=0;
+                                if (produtos.isEmpty()) {
+                                    System.out.println("Sua lista não tem produtos");
+                                }else{
+                                
+                                    System.out.print("Qual produto vai remover? Insira o código: ");
+                                    int rem= scn.nextInt();
+
+                                    for (int i = 0; i <produtos.size(); i++) {
+                                        Estoque idEstoque =  produtos.get(i);
+                                        if (idEstoque.getCodigoProduto()==rem) {
+                                            produtoExiste++;
+                                            produtos.remove(i);
+                                            System.out.println("Removido.");
+                                            
+                                        }
+                                    }
+                                    if(produtoExiste==0){
+                                            System.out.println("Produto não existe");
+                                        }
+                                    }
+
                                 System.out.println("____________________________________");
 
                             break;
                             
+                               
+                            case 4:                                
+                                menuE=4;
+                                break;
+                            default:
+                                menuE=0;
+                        }                                                
+                    }
+                    while(menuE!=4);
+                    break;
+                    
+                    
+                //Cadastrar Cliente    
+                case 3:
+                    //Começo do case 3 (30-260)
+                    do {
+                        //menu
+                        System.out.println("1) Buscar cliente");
+                        System.out.println("2) Excluir cliente");
+                        System.out.println("3) Imprimir cliente");
+                        System.out.println("4) Voltar");
+
+                        System.out.println("____________________________________");
+
+                        menuC = scn.nextByte();
+
+                        //Msg de erro
+                        if(menuC==0 || menuC>4){
+                           System.out.println("Número inválido");
+                       }
+
+                        switch(menuC){
+                           
                             //Buscar Clientes
-                            case 2:
+                            case 1:
 
                                 System.out.println("Sua lista tem "+agenda.size()+" clientes");
 
@@ -373,9 +637,10 @@ public class Agenda {
                                     for (int i = 0; i <agenda.size(); i++) {
                                         Cliente idCliente =  agenda.get(i);
                                         if (idCliente.getNome().equalsIgnoreCase(buscar)) {
-                                            agenda.get(i);
+                                            vendas.get(i);
                                             System.out.printf("%-10s%7s%13s%11s%13s%n", "Nome","Idade","CPF", "Sexo", "Telefone");
-                                            System.out.printf("%-10S%7d%13s%11s%13s%n" ,idCliente.getNome(),idCliente.getIdade(),idCliente.getCpf(), idCliente.getSexo(), idCliente.getTelefone());
+                                            System.out.printf("%-10S%7d%13s%11s%13s%n" ,idCliente.getNome(),idCliente.getIdade(),
+                                                    idCliente.getCpf(), idCliente.getSexo(), idCliente.getTelefone());
                                         }
                                     }
                                 }
@@ -385,7 +650,7 @@ public class Agenda {
                             break;
                             
                             //Excluir Clientes
-                            case 3:
+                            case 2:
 
                                 System.out.print("Qual cliente vai remover: ");
                                 String rem= scn.next();
@@ -394,7 +659,7 @@ public class Agenda {
                                     Cliente idCliente =  agenda.get(i);
                                     if (idCliente.getNome().equalsIgnoreCase(rem)) {
                                         agenda.remove(i);
-                                        System.out.println("removido");
+                                        System.out.println("Removido.");
                                     }
                                 }
 
@@ -403,7 +668,7 @@ public class Agenda {
                             break;
                             
                             //Imprimir Clientes                         
-                            case 4:
+                            case 3:
 
                                 System.out.println("____________________________________");
 
@@ -418,7 +683,7 @@ public class Agenda {
                                 System.out.println("____________________________________");
 
                             break;
-                            case 5:
+                            case 4:
                                 menuC = 5;
                             break;
                             default:

@@ -8,12 +8,13 @@ public class Estoque {
     byte tipo;
     String cor;
     int codigoProduto;
-    int quantidadeCam=0, quantidadeCal=0;
+    int quantidade=0;
     
-    public Estoque(byte tipo, String cor,int codigoProduto){
+    public Estoque(byte tipo, String cor,int codigoProduto, int quantidade){
         this.tipo = tipo;
         this.cor = cor;
         this.codigoProduto = codigoProduto;
+        this.quantidade=quantidade;
        
     }
 
@@ -35,18 +36,14 @@ public class Estoque {
     public int getCodigoProduto() {
         return codigoProduto;
     }
-    public void setQuantidadeCam(int quantidadeCam) {
-        this.quantidadeCam = quantidadeCam;
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
-    public int getQuantidadeCam() {
-        return quantidadeCam;
+    public int getQuantidade() {
+        return quantidade;
     }
-    public void setQuantidadeCal(int quantidadeCal) {
-        this.quantidadeCal = quantidadeCal;
-    }
-    public int getQuantidadeCal() {
-        return quantidadeCal;
-    }
+    
+    
     
     
 }

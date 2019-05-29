@@ -7,8 +7,9 @@ public class Cliente {
     private BigInteger telefone;
     private byte idade;
     private BigInteger cpf;
+    private int idVenda;
 
-    public Cliente(String nome ,byte idade,BigInteger cpf,String sexo, BigInteger telefone) {
+    public Cliente (String nome ,byte idade,BigInteger cpf,String sexo, BigInteger telefone) {
         
         
         
@@ -18,7 +19,7 @@ public class Cliente {
         this.idade = idade;
         this.telefone = telefone;
         this.sexo = sexo;
-   
+       
     }
     
     
@@ -46,11 +47,17 @@ public class Cliente {
     public byte getIdade() {
         return idade;
     }
-    public void setSexo(String Sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
     public String getSexo() {
         return sexo;
+    }
+    public int getIdVenda() {
+        return idVenda;
+    }
+    public void setIdVenda(int idVenda) {
+        this.idVenda = idVenda;
     }
     
         
@@ -59,7 +66,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" + "nome=" + nome + ", CPF=" + cpf + ", telefone=" + telefone + '}';
+        return "Cliente1{" + "nome=" + nome + ", CPF=" + cpf + ", telefone=" + telefone + '}';
     }
     
 }
