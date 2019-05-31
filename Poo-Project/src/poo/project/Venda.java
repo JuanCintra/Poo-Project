@@ -12,7 +12,6 @@ public class Venda extends Estoque implements ClienteInt {
     private int idVenda;
     
     
-    
     public Venda(int idVenda,byte tipo, String cor,int codigoProduto, int quantidade,
             String nome ,byte idade,BigInteger cpf,String sexo, BigInteger telefone, float preco){ 
         super(tipo, cor, codigoProduto, quantidade,preco);
@@ -88,5 +87,8 @@ public class Venda extends Estoque implements ClienteInt {
     public String getSexo() {
         return sexo;
     }
+
+    
+    
     
 }

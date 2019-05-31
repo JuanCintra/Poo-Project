@@ -112,6 +112,12 @@ public class Agenda {
                                                             String cor=idEstoque.getCor();
                                                             byte tipo=idEstoque.getTipo();
                                                             float preco=idEstoque.getPreco();
+                                                            float valor=preco*quantidade;
+                                                                System.out.println("O valor total deu R$" + valor);
+                                                                System.out.println("Para quanto será o troco?");
+                                                            float pago=scn.nextFloat();
+                                                            float troco=pago-valor;
+                                                                System.out.println("O troco deu " + troco);
                                                             idVenda++;
                                                             System.out.println("O ID da venda é " + idVenda);
                                                             vendas.add(new Venda(idVenda, tipo, cor, codigoProduto, quantidade,nome,idade,cpf,sexo,telefone,preco));
@@ -321,6 +327,17 @@ public class Agenda {
                                                 String cor=idEstoque.getCor();
                                                 byte tipo=idEstoque.getTipo();
                                                 float preco = idEstoque.getPreco();
+                                                float valor=preco*quantidade;
+                                                System.out.printf("%s%.2f%n", "O valor total deu R$", valor);
+                                                System.out.println("Para quanto será o troco?");
+                                                float pago=scn.nextFloat();
+                                                while(pago<valor){
+                                                    System.out.printf("%s%.2f%s%.2f%n", "O Valor deu R$" , valor , "! Falta R$" , (valor-pago));
+                                                    System.out.println("Insira novamente o valor pago:");
+                                                    pago=scn.nextFloat();
+                                                }
+                                                float troco=pago-valor;
+                                                System.out.printf("%s%.2f%n", "O troco deu " , troco);
                                                 idVenda++;
                                                 System.out.println("O ID da venda é " + idVenda);
                                                 agenda.add(new Cliente(nome,idade,cpf,sexo,telefone));
@@ -376,19 +393,19 @@ public class Agenda {
                                             
                                                 vendaExiste++;
                                                 vendas.get(i);
-                                            System.out.printf("%-7s%10s%7s%13s%11s%13s%6s%n","Cliente", "Nome","Idade","CPF", "Sexo", "Telefone","ID");
-                                            System.out.printf("       %10S%7d%13s%11s%13s%6d%n%n",idVendas.getNome(),idVendas.getIdade(),
+                                            System.out.printf("%-17s%10s%8s%13s%13s%13s%4s%n","Cliente", "Nome","Idade","CPF", "Sexo", "Telefone","ID");
+                                            System.out.printf("                 %10S%8d%13s%13s%13s%4d%n%n",idVendas.getNome(),idVendas.getIdade(),
                                                     idVendas.getCpf(), idVendas.getSexo(), idVendas.getTelefone(),idVendas.getIdVenda());
                                             for (i = 0; i <vendas.size(); i++) {
                                               idVendas = vendas.get(i);
                                                 if (idVendas.getIdVenda()==buscar) {
                                                   if(idVendas.getTipo()==1){
-                                                    System.out.printf("%-30s%7s%11s%15s%8s%n","Código do Produto","Tipo","Cor","Quantidade","Preço");
-                                                    System.out.printf("%-30d%7s%11s%15d%8.2f%n",idVendas.getCodigoProduto(),"Camisa",idVendas.getCor(),idVendas.getQuantidade(),idVendas.getPreco());
+                                                    System.out.printf("%-30s%7s%11s%13s%17s%n","Código do Produto","Tipo","Cor","Quantidade","Preço(unidade)");
+                                                    System.out.printf("%-30d%7s%11s%13d%17.2f%n",idVendas.getCodigoProduto(),"Camisa",idVendas.getCor(),idVendas.getQuantidade(),idVendas.getPreco());
                                                   }
                                                   if(idVendas.getTipo()==2){
-                                                    System.out.printf("%-30s%7s%11s%15s%8s%n","Código do Produto","Tipo","Cor","Quantidade","Preço");
-                                                    System.out.printf("%-30d%7s%11s%15d%8.2f%n",idVendas.getCodigoProduto(),"Calça",idVendas.getCor(),idVendas.getQuantidade(),idVendas.getPreco());
+                                                    System.out.printf("%-30s%7s%11s%13s%17s%n","Código do Produto","Tipo","Cor","Quantidade","Preço(unidade)");
+                                                    System.out.printf("%-30d%7s%11s%13d%17.2f%n",idVendas.getCodigoProduto(),"Calça",idVendas.getCor(),idVendas.getQuantidade(),idVendas.getPreco());
                                                   } 
                                                 }
                                             }

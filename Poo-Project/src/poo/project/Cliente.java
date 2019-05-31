@@ -7,7 +7,6 @@ public class Cliente {
     private BigInteger telefone;
     private byte idade;
     private BigInteger cpf;
-    private int idVenda;
 
     public Cliente (String nome ,byte idade,BigInteger cpf,String sexo, BigInteger telefone) {
         
@@ -53,12 +52,7 @@ public class Cliente {
     public String getSexo() {
         return sexo;
     }
-    public int getIdVenda() {
-        return idVenda;
-    }
-    public void setIdVenda(int idVenda) {
-        this.idVenda = idVenda;
-    }
+
     
         
     
