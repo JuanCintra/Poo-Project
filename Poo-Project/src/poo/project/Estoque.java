@@ -5,11 +5,11 @@ package poo.project;
 //teste
 public class Estoque {
     
-    byte tipo;
-    String cor;
-    int codigoProduto;
-    int quantidade=0;
-    float preco;
+        public byte tipo;
+        public String cor;
+        public int codigoProduto;
+        public int quantidade=0;
+       public float preco;
     
     public Estoque(byte tipo, String cor,int codigoProduto, int quantidade,float preco){
         this.tipo = tipo;
